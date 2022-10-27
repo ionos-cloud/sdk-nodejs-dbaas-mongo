@@ -63,7 +63,7 @@ export const SnapshotsApiAxiosParamCreator = function (configuration?: Configura
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarApiKeyValue;
             }
 
 

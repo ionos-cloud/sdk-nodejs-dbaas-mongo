@@ -67,7 +67,7 @@ export const ClustersApiAxiosParamCreator = function (configuration?: Configurat
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarApiKeyValue;
             }
 
 
@@ -124,7 +124,7 @@ export const ClustersApiAxiosParamCreator = function (configuration?: Configurat
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarApiKeyValue;
             }
 
 
@@ -177,7 +177,7 @@ export const ClustersApiAxiosParamCreator = function (configuration?: Configurat
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarApiKeyValue;
             }
 
             if ((filterName === undefined) && (configuration !== undefined)) {
@@ -240,7 +240,7 @@ export const ClustersApiAxiosParamCreator = function (configuration?: Configurat
                 const localVarApiKeyValue = typeof configuration.apiKey === 'function'
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarApiKeyValue;
             }
 
 
