@@ -5,6 +5,8 @@ A MongoDB template item.
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
 | **id** | **string** | The unique template ID. | [optional] [default to undefined] |
+| **name** | **string** | The name of the template. | [optional] [default to undefined] |
+| **edition** | **string** | The edition of the template (e.g. enterprise) | [optional] [default to undefined] |
 | **cores** | **number** | The number of CPU cores. | [optional] [default to undefined] |
 | **ram** | **number** | The amount of memory in GB. | [optional] [default to undefined] |
 | **storageSize** | **number** | The amount of storage size in GB. | [optional] [default to undefined] |

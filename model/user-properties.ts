@@ -30,13 +30,6 @@ export interface UserProperties {
     username: string;
 
     /**
-     * The user database to use for authentication.
-     * @type {string}
-     * @memberof UserProperties
-     */
-    database: string;
-
-    /**
      * 
      * @type {string}
      * @memberof UserProperties

@@ -120,7 +120,7 @@ export class Configuration {
         this.maxRetries = DEFAULT_MAX_RETRIES;
         this.maxWaitTime = DEFAULT_MAX_WAIT_TIME;
         this.debug = false;
-        this.setUserAgent('ionos-cloud-sdk-node-dbaas-mongo/vv1.0.1');
+        this.setUserAgent('ionos-cloud-sdk-node-dbaas-mongo/v1.1.0');
     }
 
     static fromEnv(): Configuration {

@@ -26,6 +26,8 @@ import { ClusterResponse } from '../model';
 import { CreateClusterRequest } from '../model';
 // @ts-ignore
 import { ErrorResponse } from '../model';
+// @ts-ignore
+import { PatchClusterRequest } from '../model';
 /**
  * ClustersApi - axios parameter creator
  * @export
@@ -207,6 +209,74 @@ export const ClustersApiAxiosParamCreator = function (configuration?: Configurat
             };
         },
         /**
+         * Patch attributes of a MongoDB cluster.
+         * @summary Patch a cluster
+         * @param {string} clusterId The unique ID of the cluster.
+         * @param {PatchClusterRequest} patchClusterRequest Part of the cluster which should be modified.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clustersPatch: async (clusterId: string, patchClusterRequest: PatchClusterRequest, options: any = {}): Promise<RequestArgs> => {
+            if (clusterId === null || clusterId === undefined) {
+                throw new RequiredError('clusterId','Required parameter clusterId was null or undefined when calling clustersPatch.');
+            }
+            if (patchClusterRequest === null || patchClusterRequest === undefined) {
+                throw new RequiredError('patchClusterRequest','Required parameter patchClusterRequest was null or undefined when calling clustersPatch.');
+            }
+            const localVarPath = `/clusters/{clusterId}`
+                .replace(`{${"clusterId"}}`, encodeURIComponent(String(clusterId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            if (configuration && (configuration.username || configuration.password)) {
+                localVarRequestOptions["auth"] = { username: configuration.username, password: configuration.password };
+            }
+
+            // authentication tokenAuth required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("Authorization")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["Authorization"] = "Bearer " + localVarApiKeyValue;
+            }
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            const queryParameters = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                queryParameters.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.query) {
+                queryParameters.set(key, options.query[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(queryParameters)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const nonString = typeof patchClusterRequest !== 'string';
+            const needsSerialization = nonString && configuration && configuration.isJsonMime
+                ? configuration.isJsonMime(localVarRequestOptions.headers['Content-Type'])
+                : nonString;
+            localVarRequestOptions.data =  needsSerialization
+                ? JSON.stringify(patchClusterRequest !== undefined ? patchClusterRequest : {})
+                : (patchClusterRequest || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Creates a new MongoDB cluster. 
          * @summary Create a Cluster
          * @param {CreateClusterRequest} createClusterRequest The cluster to be created.
@@ -312,6 +382,18 @@ export const ClustersApiFp = function(configuration?: Configuration) {
             return runRequest(axiosArgs, configuration);
         },
         /**
+         * Patch attributes of a MongoDB cluster.
+         * @summary Patch a cluster
+         * @param {string} clusterId The unique ID of the cluster.
+         * @param {PatchClusterRequest} patchClusterRequest Part of the cluster which should be modified.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async clustersPatch(clusterId: string, patchClusterRequest: PatchClusterRequest, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClusterResponse>> {
+            const axiosArgs = await ClustersApiAxiosParamCreator(configuration).clustersPatch(clusterId, patchClusterRequest, options);
+            return runRequest(axiosArgs, configuration);
+        },
+        /**
          * Creates a new MongoDB cluster. 
          * @summary Create a Cluster
          * @param {CreateClusterRequest} createClusterRequest The cluster to be created.
@@ -360,6 +442,17 @@ export const ClustersApiFactory = function (configuration?: Configuration, baseP
          */
         clustersGet(filterName?: string, options?: any): AxiosPromise<ClusterList> {
             return ClustersApiFp(configuration).clustersGet(filterName, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Patch attributes of a MongoDB cluster.
+         * @summary Patch a cluster
+         * @param {string} clusterId The unique ID of the cluster.
+         * @param {PatchClusterRequest} patchClusterRequest Part of the cluster which should be modified.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        clustersPatch(clusterId: string, patchClusterRequest: PatchClusterRequest, options?: any): AxiosPromise<ClusterResponse> {
+            return ClustersApiFp(configuration).clustersPatch(clusterId, patchClusterRequest, options).then((request) => request(axios, basePath));
         },
         /**
          * Creates a new MongoDB cluster. 
@@ -417,6 +510,27 @@ export interface ClustersApiClustersGetRequest {
 }
 
 /**
+ * Request parameters for clustersPatch operation in ClustersApi.
+ * @export
+ * @interface ClustersApiClustersPatchRequest
+ */
+export interface ClustersApiClustersPatchRequest {
+    /**
+     * The unique ID of the cluster.
+     * @type {string}
+     * @memberof ClustersApiClustersPatch
+     */
+    readonly clusterId: string
+
+    /**
+     * Part of the cluster which should be modified.
+     * @type {PatchClusterRequest}
+     * @memberof ClustersApiClustersPatch
+     */
+    readonly patchClusterRequest: PatchClusterRequest
+}
+
+/**
  * Request parameters for clustersPost operation in ClustersApi.
  * @export
  * @interface ClustersApiClustersPostRequest
@@ -471,6 +585,18 @@ export class ClustersApi extends BaseAPI {
      */
     public clustersGet(requestParameters: ClustersApiClustersGetRequest = {}, options?: any) {
         return ClustersApiFp(this.configuration).clustersGet(requestParameters.filterName, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Patch attributes of a MongoDB cluster.
+     * @summary Patch a cluster
+     * @param {ClustersApiClustersPatchRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ClustersApi
+     */
+    public clustersPatch(requestParameters: ClustersApiClustersPatchRequest, options?: any) {
+        return ClustersApiFp(this.configuration).clustersPatch(requestParameters.clusterId, requestParameters.patchClusterRequest, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

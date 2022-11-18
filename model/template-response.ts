@@ -29,6 +29,20 @@ export interface TemplateResponse {
     id?: string;
 
     /**
+     * The name of the template.
+     * @type {string}
+     * @memberof TemplateResponse
+     */
+    name?: string;
+
+    /**
+     * The edition of the template (e.g. enterprise)
+     * @type {string}
+     * @memberof TemplateResponse
+     */
+    edition?: string;
+
+    /**
      * The number of CPU cores.
      * @type {number}
      * @memberof TemplateResponse

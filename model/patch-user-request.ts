@@ -13,36 +13,29 @@
  */
 
 
-import { ResourceType } from './resource-type';
-import { TemplateResponse } from './template-response';
+import { PatchUserProperties } from './patch-user-properties';
+import { UserMetadata } from './user-metadata';
 
 /**
- * 
+ * MongoDB database user patch request.
  * @export
- * @interface TemplateListAllOf
+ * @interface PatchUserRequest
  */
-export interface TemplateListAllOf {
+export interface PatchUserRequest {
 
     /**
      * 
-     * @type {ResourceType}
-     * @memberof TemplateListAllOf
+     * @type {UserMetadata}
+     * @memberof PatchUserRequest
      */
-    type?: ResourceType;
-
-    /**
-     * The unique ID of the resource.
-     * @type {string}
-     * @memberof TemplateListAllOf
-     */
-    id?: string;
+    metadata?: UserMetadata;
 
     /**
      * 
-     * @type {Array<TemplateResponse>}
-     * @memberof TemplateListAllOf
+     * @type {PatchUserProperties}
+     * @memberof PatchUserRequest
      */
-    items?: Array<TemplateResponse>;
+    properties?: PatchUserProperties;
 }
 
 

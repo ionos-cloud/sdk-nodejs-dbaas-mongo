@@ -13,36 +13,29 @@
  */
 
 
-import { ResourceType } from './resource-type';
-import { TemplateResponse } from './template-response';
+import { Metadata } from './metadata';
+import { PatchClusterProperties } from './patch-cluster-properties';
 
 /**
- * 
+ * Request payload to change a cluster.
  * @export
- * @interface TemplateListAllOf
+ * @interface PatchClusterRequest
  */
-export interface TemplateListAllOf {
+export interface PatchClusterRequest {
 
     /**
      * 
-     * @type {ResourceType}
-     * @memberof TemplateListAllOf
+     * @type {Metadata}
+     * @memberof PatchClusterRequest
      */
-    type?: ResourceType;
-
-    /**
-     * The unique ID of the resource.
-     * @type {string}
-     * @memberof TemplateListAllOf
-     */
-    id?: string;
+    metadata?: Metadata;
 
     /**
      * 
-     * @type {Array<TemplateResponse>}
-     * @memberof TemplateListAllOf
+     * @type {PatchClusterProperties}
+     * @memberof PatchClusterRequest
      */
-    items?: Array<TemplateResponse>;
+    properties?: PatchClusterProperties;
 }
 
 

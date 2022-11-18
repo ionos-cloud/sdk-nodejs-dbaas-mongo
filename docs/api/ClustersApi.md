@@ -7,6 +7,7 @@ All URIs are relative to *https://api.ionos.com/databases/mongodb*
 | [**clustersDelete**](ClustersApi.md#clustersdelete) | **DELETE** /clusters/{clusterId} | Delete a Cluster |
 | [**clustersFindById**](ClustersApi.md#clustersfindbyid) | **GET** /clusters/{clusterId} | Get a cluster by id |
 | [**clustersGet**](ClustersApi.md#clustersget) | **GET** /clusters | Get Clusters |
+| [**clustersPatch**](ClustersApi.md#clusterspatch) | **PATCH** /clusters/{clusterId} | Patch a cluster |
 | [**clustersPost**](ClustersApi.md#clusterspost) | **POST** /clusters | Create a Cluster |
 
 
@@ -152,6 +153,56 @@ basicAuth, tokenAuth
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## clustersPatch
+
+> <ClusterResponse> clustersPatch(clusterId, patchClusterRequest)
+
+Patch a cluster
+
+Patch attributes of a MongoDB cluster.
+
+### Examples
+
+```javascript
+const ionoscloud = require('@ionos-cloud/sdk-nodejs-dbaas-mongo');
+// setup authorization
+const config = new ionoscloud.Configuration({
+    username: 'YOUR_USERNAME',
+    password: 'YOUR_PASSWORD',
+    apiKey: 'YOUR_API_KEY'
+});
+const api_instance = new ionoscloud.ClustersApi(config);
+// Patch a cluster
+api_instance
+  .clustersPatch({
+    clusterId: clusterId_example,
+    patchClusterRequest: patchClusterRequest_example
+  })
+  .then((response) => console.log(response.data))
+  .catch((error) => console.log(error.response.data));
+```
+
+### Parameters
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **clusterId** | **string** | The unique ID of the cluster. | [default to undefined] |
+| **patchClusterRequest** | [**PatchClusterRequest**](../models/PatchClusterRequest.md) | Part of the cluster which should be modified. |  |
+
+### Return type
+
+[**ClusterResponse**](../models/ClusterResponse.md)
+
+### Authorization
+
+basicAuth, tokenAuth
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 

@@ -17,60 +17,46 @@ import { Connection } from './connection';
 import { MaintenanceWindow } from './maintenance-window';
 
 /**
- * The properties with all data needed to create a new MongoDB cluster. 
+ * Properties of the payload to change a cluster.
  * @export
- * @interface CreateClusterProperties
+ * @interface PatchClusterProperties
  */
-export interface CreateClusterProperties {
-
-    /**
-     * The unique ID of the template, which specifies the number of cores, storage size, and memory. You cannot downgrade to a smaller template or minor edition (e.g. from business to playground). To get a list of all templates to confirm the changes use the /templates endpoint. 
-     * @type {string}
-     * @memberof CreateClusterProperties
-     */
-    templateID: string;
-
-    /**
-     * The MongoDB version of your cluster.
-     * @type {string}
-     * @memberof CreateClusterProperties
-     */
-    mongoDBVersion?: string;
-
-    /**
-     * The total number of instances in the cluster (one primary and n-1 secondaries). 
-     * @type {number}
-     * @memberof CreateClusterProperties
-     */
-    instances: number;
-
-    /**
-     * 
-     * @type {Array<Connection>}
-     * @memberof CreateClusterProperties
-     */
-    connections: Array<Connection>;
-
-    /**
-     * The physical location where the cluster will be created. This is the location where all your instances will be located. This property is immutable. 
-     * @type {string}
-     * @memberof CreateClusterProperties
-     */
-    location: string;
+export interface PatchClusterProperties {
 
     /**
      * The name of your cluster.
      * @type {string}
-     * @memberof CreateClusterProperties
+     * @memberof PatchClusterProperties
      */
-    displayName: string;
+    displayName?: string;
 
     /**
      * 
      * @type {MaintenanceWindow}
-     * @memberof CreateClusterProperties
+     * @memberof PatchClusterProperties
      */
     maintenanceWindow?: MaintenanceWindow;
+
+    /**
+     * The total number of instances in the cluster (one primary and n-1 secondaries). 
+     * @type {number}
+     * @memberof PatchClusterProperties
+     */
+    instances?: number;
+
+    /**
+     * 
+     * @type {Array<Connection>}
+     * @memberof PatchClusterProperties
+     */
+    connections?: Array<Connection>;
+
+    /**
+     * The unique ID of the template, which specifies the number of cores, storage size, and memory. You cannot downgrade to a smaller template or minor edition (e.g. from business to playground). To get a list of all templates to confirm the changes use the /templates endpoint. 
+     * @type {string}
+     * @memberof PatchClusterProperties
+     */
+    templateID?: string;
 }
 
 

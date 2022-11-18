@@ -13,6 +13,9 @@
  */
 
 
+import { Pagination } from './pagination';
+import { PaginationLinks } from './pagination-links';
+import { ResourceType } from './resource-type';
 import { TemplateListAllOf } from './template-list-all-of';
 import { TemplateResponse } from './template-response';
 
@@ -21,7 +24,7 @@ import { TemplateResponse } from './template-response';
  * The list of MongoDB templates.
  * @export
  */
-export type TemplateList = TemplateListAllOf;
+export type TemplateList = Pagination & TemplateListAllOf;
 
 
 
