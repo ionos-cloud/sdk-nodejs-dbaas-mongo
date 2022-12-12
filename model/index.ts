@@ -13,6 +13,7 @@ export * from './create-restore-request';
 export * from './day-of-the-week';
 export * from './error-message';
 export * from './error-response';
+export * from './health';
 export * from './maintenance-window';
 export * from './metadata';
 export * from './pagination';

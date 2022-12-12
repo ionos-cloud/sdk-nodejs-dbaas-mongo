@@ -4,16 +4,16 @@ All URIs are relative to *https://api.ionos.com/databases/mongodb*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**clustersUsersDelete**](UsersApi.md#clustersusersdelete) | **DELETE** /clusters/{clusterId}/users/{database}/{username} | Delete a MongoDB User by ID |
-| [**clustersUsersFindById**](UsersApi.md#clustersusersfindbyid) | **GET** /clusters/{clusterId}/users/{database}/{username} | Get a MongoDB User by ID |
-| [**clustersUsersGet**](UsersApi.md#clustersusersget) | **GET** /clusters/{clusterId}/users | Get a Cluster Users |
-| [**clustersUsersPatch**](UsersApi.md#clustersuserspatch) | **PATCH** /clusters/{clusterId}/users/{database}/{username} | Patch a MongoDB User by ID |
+| [**clustersUsersDelete**](UsersApi.md#clustersusersdelete) | **DELETE** /clusters/{clusterId}/users/{username} | Delete a MongoDB User by ID |
+| [**clustersUsersFindById**](UsersApi.md#clustersusersfindbyid) | **GET** /clusters/{clusterId}/users/{username} | Get a MongoDB User by ID |
+| [**clustersUsersGet**](UsersApi.md#clustersusersget) | **GET** /clusters/{clusterId}/users | Get all Cluster Users |
+| [**clustersUsersPatch**](UsersApi.md#clustersuserspatch) | **PATCH** /clusters/{clusterId}/users/{username} | Patch a MongoDB User by ID |
 | [**clustersUsersPost**](UsersApi.md#clustersuserspost) | **POST** /clusters/{clusterId}/users | Create MongoDB User |
 
 
 ## clustersUsersDelete
 
-> <User> clustersUsersDelete(clusterId, database, username)
+> <User> clustersUsersDelete(clusterId, username)
 
 Delete a MongoDB User by ID
 
@@ -34,7 +34,6 @@ const api_instance = new ionoscloud.UsersApi(config);
 api_instance
   .clustersUsersDelete({
     clusterId: clusterId_example,
-    database: database_example,
     username: username_example
   })
   .then((response) => console.log(response.data))
@@ -46,7 +45,6 @@ api_instance
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **clusterId** | **string** | The unique ID of the cluster. | [default to undefined] |
-| **database** | **string** | The authentication database. | [default to undefined] |
 | **username** | **string** | The authentication username. | [default to undefined] |
 
 ### Return type
@@ -65,11 +63,11 @@ basicAuth, tokenAuth
 
 ## clustersUsersFindById
 
-> <User> clustersUsersFindById(clusterId, database, username)
+> <User> clustersUsersFindById(clusterId, username)
 
 Get a MongoDB User by ID
 
-Retrieves the MongoDB user identified by the username and database parameters.
+Retrieves the MongoDB user identified by the username.
 
 ### Examples
 
@@ -86,7 +84,6 @@ const api_instance = new ionoscloud.UsersApi(config);
 api_instance
   .clustersUsersFindById({
     clusterId: clusterId_example,
-    database: database_example,
     username: username_example
   })
   .then((response) => console.log(response.data))
@@ -98,7 +95,6 @@ api_instance
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **clusterId** | **string** | The unique ID of the cluster. | [default to undefined] |
-| **database** | **string** | The authentication database. | [default to undefined] |
 | **username** | **string** | The authentication username. | [default to undefined] |
 
 ### Return type
@@ -119,7 +115,7 @@ basicAuth, tokenAuth
 
 > <UsersList> clustersUsersGet(clusterId)
 
-Get a Cluster Users
+Get all Cluster Users
 
 Retrieves a list of MongoDB users.
 
@@ -134,7 +130,7 @@ const config = new ionoscloud.Configuration({
     apiKey: 'YOUR_API_KEY'
 });
 const api_instance = new ionoscloud.UsersApi(config);
-// Get a Cluster Users
+// Get all Cluster Users
 api_instance
   .clustersUsersGet({
     clusterId: clusterId_example
@@ -165,7 +161,7 @@ basicAuth, tokenAuth
 
 ## clustersUsersPatch
 
-> <User> clustersUsersPatch(clusterId, database, username, patchUserRequest)
+> <User> clustersUsersPatch(clusterId, username, patchUserRequest)
 
 Patch a MongoDB User by ID
 
@@ -186,7 +182,6 @@ const api_instance = new ionoscloud.UsersApi(config);
 api_instance
   .clustersUsersPatch({
     clusterId: clusterId_example,
-    database: database_example,
     username: username_example,
     patchUserRequest: patchUserRequest_example
   })
@@ -199,7 +194,6 @@ api_instance
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **clusterId** | **string** | The unique ID of the cluster. | [default to undefined] |
-| **database** | **string** | The authentication database. | [default to undefined] |
 | **username** | **string** | The authentication username. | [default to undefined] |
 | **patchUserRequest** | [**PatchUserRequest**](../models/PatchUserRequest.md) | Part of the MongoDB user which should be modified. |  |
 

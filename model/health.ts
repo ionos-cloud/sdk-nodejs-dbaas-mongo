@@ -13,35 +13,18 @@
  */
 
 
-import { PaginationLinks } from './pagination-links';
 
 /**
- * 
+ * The current health status reported by the cluster. * **HEALTHY** Primary exists and number of replicas is equal to specified. * **UNHEALTHY** Primary does not exist or cluster doesn\'t have majority. * **DEGRADED** Primary exists and number of replicas is less than specified. * **UNKNOWN** The health status is unknown. 
  * @export
- * @interface Pagination
+ * @enum {string}
  */
-export interface Pagination {
-
-    /**
-     * The offset specified in the request (if none was specified, the default offset is 0) (not implemented yet). 
-     * @type {number}
-     * @memberof Pagination
-     */
-    offset?: number;
-
-    /**
-     * The limit specified in the request (if none was specified, use the endpoint\'s default pagination limit) (not implemented yet, always return number of items). 
-     * @type {number}
-     * @memberof Pagination
-     */
-    limit?: number;
-
-    /**
-     * 
-     * @type {PaginationLinks}
-     * @memberof Pagination
-     */
-    _links?: PaginationLinks;
+export enum Health {
+    Healthy = 'HEALTHY',
+    Unhealthy = 'UNHEALTHY',
+    Degraded = 'DEGRADED',
+    Unknown = 'UNKNOWN'
 }
+
 
 

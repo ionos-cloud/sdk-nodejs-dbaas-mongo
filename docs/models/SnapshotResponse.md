@@ -1,6 +1,6 @@
 # SnapshotResponse
 
-A database snapshost.
+A database snapshot.
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
