@@ -10,7 +10,6 @@ ones. It is designed to allow users to leverage the same power and
 flexibility found within the DCD visual tool. Both tools are consistent with
 their concepts and lend well to making the experience smooth and intuitive.
 
-**Note:** DBaaS - MongoDB is currently in the **Early Access (EA)** phase. We recommend keeping usage and testing to non-production critical applications. Please contact your sales representative or support for more information.
 
 ## Getting Started
 
