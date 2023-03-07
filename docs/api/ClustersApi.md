@@ -129,6 +129,8 @@ const api_instance = new ionoscloud.ClustersApi(config);
 // Get Clusters
 api_instance
   .clustersGet({
+    limit: 100,
+    offset: 200,
     filterName: filterName_example
     options: {}
   })
@@ -140,6 +142,8 @@ api_instance
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
+| **limit** | **number** | The maximum number of elements to return. Use together with \&#39;offset\&#39; for pagination. | [optional][default to 100] |
+| **offset** | **number** | The first element to return. Use together with \&#39;limit\&#39; for pagination. | [optional][default to 0] |
 | **filterName** | **string** | Response filter to list only the MongoDB clusters that contain the specified name. The value is case insensitive and matched on the \&#39;displayName\&#39; field.  | [optional][default to undefined] |
 
 ### Return type

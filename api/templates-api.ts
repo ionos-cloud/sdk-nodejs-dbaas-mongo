@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * IONOS DBaaS MongoDB REST API
- * With IONOS Cloud Database as a Service, you have the ability to quickly set up and manage a MongoDB database. You can also delete clusters, manage backups and users via the API.   MongoDB is an open source, cross-platform, document-oriented database program. Classified as a NoSQL database program, it uses JSON-like documents with optional schemas.  The MongoDB API allows you to create additional database clusters or modify existing ones. Both tools, the Data Center Designer (DCD) and the API use the same concepts consistently and are well suited for smooth and intuitive use. 
+ * With IONOS Cloud Database as a Service, you have the ability to quickly set up and manage a MongoDB database. You can also delete clusters, manage backups and users via the API.  MongoDB is an open source, cross-platform, document-oriented database program. Classified as a NoSQL database program, it uses JSON-like documents with optional schemas.  The MongoDB API allows you to create additional database clusters or modify existing ones. Both tools, the Data Center Designer (DCD) and the API use the same concepts consistently and are well suited for smooth and intuitive use. 
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -31,10 +31,12 @@ export const TemplatesApiAxiosParamCreator = function (configuration?: Configura
         /**
          * Retrieves a list of valid templates. These templates can be used to create MongoDB clusters; they contain properties, such as number of cores, RAM, and the storage size. 
          * @summary Get Templates
+         * @param {number} [limit] The maximum number of elements to return. Use together with \&#39;offset\&#39; for pagination.
+         * @param {number} [offset] The first element to return. Use together with \&#39;limit\&#39; for pagination.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        templatesGet: async (options: any = {}): Promise<RequestArgs> => {
+        templatesGet: async (limit?: number, offset?: number, options: any = {}): Promise<RequestArgs> => {
             const localVarPath = `/templates`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -59,6 +61,20 @@ export const TemplatesApiAxiosParamCreator = function (configuration?: Configura
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
                 localVarHeaderParameter["Authorization"] = "Bearer " + localVarApiKeyValue;
+            }
+
+            if ((limit === undefined) && (configuration !== undefined)) {
+                limit = configuration.getDefaultParamValue('limit');
+            }
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if ((offset === undefined) && (configuration !== undefined)) {
+                offset = configuration.getDefaultParamValue('offset');
+            }
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
             }
 
 
@@ -92,11 +108,13 @@ export const TemplatesApiFp = function(configuration?: Configuration) {
         /**
          * Retrieves a list of valid templates. These templates can be used to create MongoDB clusters; they contain properties, such as number of cores, RAM, and the storage size. 
          * @summary Get Templates
+         * @param {number} [limit] The maximum number of elements to return. Use together with \&#39;offset\&#39; for pagination.
+         * @param {number} [offset] The first element to return. Use together with \&#39;limit\&#39; for pagination.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async templatesGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TemplateList>> {
-            const axiosArgs = await TemplatesApiAxiosParamCreator(configuration).templatesGet(options);
+        async templatesGet(limit?: number, offset?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TemplateList>> {
+            const axiosArgs = await TemplatesApiAxiosParamCreator(configuration).templatesGet(limit, offset, options);
             return runRequest(axiosArgs, configuration);
         },
     }
@@ -111,14 +129,37 @@ export const TemplatesApiFactory = function (configuration?: Configuration, base
         /**
          * Retrieves a list of valid templates. These templates can be used to create MongoDB clusters; they contain properties, such as number of cores, RAM, and the storage size. 
          * @summary Get Templates
+         * @param {number} [limit] The maximum number of elements to return. Use together with \&#39;offset\&#39; for pagination.
+         * @param {number} [offset] The first element to return. Use together with \&#39;limit\&#39; for pagination.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        templatesGet(options?: any): AxiosPromise<TemplateList> {
-            return TemplatesApiFp(configuration).templatesGet(options).then((request) => request(axios, basePath));
+        templatesGet(limit?: number, offset?: number, options?: any): AxiosPromise<TemplateList> {
+            return TemplatesApiFp(configuration).templatesGet(limit, offset, options).then((request) => request(axios, basePath));
         },
     };
 };
+
+/**
+ * Request parameters for templatesGet operation in TemplatesApi.
+ * @export
+ * @interface TemplatesApiTemplatesGetRequest
+ */
+export interface TemplatesApiTemplatesGetRequest {
+    /**
+     * The maximum number of elements to return. Use together with \&#39;offset\&#39; for pagination.
+     * @type {number}
+     * @memberof TemplatesApiTemplatesGet
+     */
+    readonly limit?: number
+
+    /**
+     * The first element to return. Use together with \&#39;limit\&#39; for pagination.
+     * @type {number}
+     * @memberof TemplatesApiTemplatesGet
+     */
+    readonly offset?: number
+}
 
 /**
  * TemplatesApi - object-oriented interface
@@ -130,11 +171,12 @@ export class TemplatesApi extends BaseAPI {
     /**
      * Retrieves a list of valid templates. These templates can be used to create MongoDB clusters; they contain properties, such as number of cores, RAM, and the storage size. 
      * @summary Get Templates
+     * @param {TemplatesApiTemplatesGetRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TemplatesApi
      */
-    public templatesGet(options?: any) {
-        return TemplatesApiFp(this.configuration).templatesGet(options).then((request) => request(this.axios, this.basePath));
+    public templatesGet(requestParameters: TemplatesApiTemplatesGetRequest = {}, options?: any) {
+        return TemplatesApiFp(this.configuration).templatesGet(requestParameters.limit, requestParameters.offset, options).then((request) => request(this.axios, this.basePath));
     }
 }

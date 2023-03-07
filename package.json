@@ -1,6 +1,6 @@
 {
   "name": "@ionos-cloud/sdk-nodejs-dbaas-mongo",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "NodeJS SDK for MongoDB DBaaS",
   "author": "Ionos",
   "keywords": [

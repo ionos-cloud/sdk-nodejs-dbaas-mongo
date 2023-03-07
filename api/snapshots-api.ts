@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * IONOS DBaaS MongoDB REST API
- * With IONOS Cloud Database as a Service, you have the ability to quickly set up and manage a MongoDB database. You can also delete clusters, manage backups and users via the API.   MongoDB is an open source, cross-platform, document-oriented database program. Classified as a NoSQL database program, it uses JSON-like documents with optional schemas.  The MongoDB API allows you to create additional database clusters or modify existing ones. Both tools, the Data Center Designer (DCD) and the API use the same concepts consistently and are well suited for smooth and intuitive use. 
+ * With IONOS Cloud Database as a Service, you have the ability to quickly set up and manage a MongoDB database. You can also delete clusters, manage backups and users via the API.  MongoDB is an open source, cross-platform, document-oriented database program. Classified as a NoSQL database program, it uses JSON-like documents with optional schemas.  The MongoDB API allows you to create additional database clusters or modify existing ones. Both tools, the Data Center Designer (DCD) and the API use the same concepts consistently and are well suited for smooth and intuitive use. 
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -32,10 +32,12 @@ export const SnapshotsApiAxiosParamCreator = function (configuration?: Configura
          * Retrieves MongoDB snapshots.
          * @summary Get the snapshots of your cluster
          * @param {string} clusterId The unique ID of the cluster.
+         * @param {number} [limit] The maximum number of elements to return. Use together with \&#39;offset\&#39; for pagination.
+         * @param {number} [offset] The first element to return. Use together with \&#39;limit\&#39; for pagination.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clustersSnapshotsGet: async (clusterId: string, options: any = {}): Promise<RequestArgs> => {
+        clustersSnapshotsGet: async (clusterId: string, limit?: number, offset?: number, options: any = {}): Promise<RequestArgs> => {
             if (clusterId === null || clusterId === undefined) {
                 throw new RequiredError('clusterId','Required parameter clusterId was null or undefined when calling clustersSnapshotsGet.');
             }
@@ -64,6 +66,20 @@ export const SnapshotsApiAxiosParamCreator = function (configuration?: Configura
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
                 localVarHeaderParameter["Authorization"] = "Bearer " + localVarApiKeyValue;
+            }
+
+            if ((limit === undefined) && (configuration !== undefined)) {
+                limit = configuration.getDefaultParamValue('limit');
+            }
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if ((offset === undefined) && (configuration !== undefined)) {
+                offset = configuration.getDefaultParamValue('offset');
+            }
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
             }
 
 
@@ -98,11 +114,13 @@ export const SnapshotsApiFp = function(configuration?: Configuration) {
          * Retrieves MongoDB snapshots.
          * @summary Get the snapshots of your cluster
          * @param {string} clusterId The unique ID of the cluster.
+         * @param {number} [limit] The maximum number of elements to return. Use together with \&#39;offset\&#39; for pagination.
+         * @param {number} [offset] The first element to return. Use together with \&#39;limit\&#39; for pagination.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async clustersSnapshotsGet(clusterId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SnapshotList>> {
-            const axiosArgs = await SnapshotsApiAxiosParamCreator(configuration).clustersSnapshotsGet(clusterId, options);
+        async clustersSnapshotsGet(clusterId: string, limit?: number, offset?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<SnapshotList>> {
+            const axiosArgs = await SnapshotsApiAxiosParamCreator(configuration).clustersSnapshotsGet(clusterId, limit, offset, options);
             return runRequest(axiosArgs, configuration);
         },
     }
@@ -118,11 +136,13 @@ export const SnapshotsApiFactory = function (configuration?: Configuration, base
          * Retrieves MongoDB snapshots.
          * @summary Get the snapshots of your cluster
          * @param {string} clusterId The unique ID of the cluster.
+         * @param {number} [limit] The maximum number of elements to return. Use together with \&#39;offset\&#39; for pagination.
+         * @param {number} [offset] The first element to return. Use together with \&#39;limit\&#39; for pagination.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clustersSnapshotsGet(clusterId: string, options?: any): AxiosPromise<SnapshotList> {
-            return SnapshotsApiFp(configuration).clustersSnapshotsGet(clusterId, options).then((request) => request(axios, basePath));
+        clustersSnapshotsGet(clusterId: string, limit?: number, offset?: number, options?: any): AxiosPromise<SnapshotList> {
+            return SnapshotsApiFp(configuration).clustersSnapshotsGet(clusterId, limit, offset, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -139,6 +159,20 @@ export interface SnapshotsApiClustersSnapshotsGetRequest {
      * @memberof SnapshotsApiClustersSnapshotsGet
      */
     readonly clusterId: string
+
+    /**
+     * The maximum number of elements to return. Use together with \&#39;offset\&#39; for pagination.
+     * @type {number}
+     * @memberof SnapshotsApiClustersSnapshotsGet
+     */
+    readonly limit?: number
+
+    /**
+     * The first element to return. Use together with \&#39;limit\&#39; for pagination.
+     * @type {number}
+     * @memberof SnapshotsApiClustersSnapshotsGet
+     */
+    readonly offset?: number
 }
 
 /**
@@ -157,6 +191,6 @@ export class SnapshotsApi extends BaseAPI {
      * @memberof SnapshotsApi
      */
     public clustersSnapshotsGet(requestParameters: SnapshotsApiClustersSnapshotsGetRequest, options?: any) {
-        return SnapshotsApiFp(this.configuration).clustersSnapshotsGet(requestParameters.clusterId, options).then((request) => request(this.axios, this.basePath));
+        return SnapshotsApiFp(this.configuration).clustersSnapshotsGet(requestParameters.clusterId, requestParameters.limit, requestParameters.offset, options).then((request) => request(this.axios, this.basePath));
     }
 }

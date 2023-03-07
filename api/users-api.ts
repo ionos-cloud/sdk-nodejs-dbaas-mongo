@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * IONOS DBaaS MongoDB REST API
- * With IONOS Cloud Database as a Service, you have the ability to quickly set up and manage a MongoDB database. You can also delete clusters, manage backups and users via the API.   MongoDB is an open source, cross-platform, document-oriented database program. Classified as a NoSQL database program, it uses JSON-like documents with optional schemas.  The MongoDB API allows you to create additional database clusters or modify existing ones. Both tools, the Data Center Designer (DCD) and the API use the same concepts consistently and are well suited for smooth and intuitive use. 
+ * With IONOS Cloud Database as a Service, you have the ability to quickly set up and manage a MongoDB database. You can also delete clusters, manage backups and users via the API.  MongoDB is an open source, cross-platform, document-oriented database program. Classified as a NoSQL database program, it uses JSON-like documents with optional schemas.  The MongoDB API allows you to create additional database clusters or modify existing ones. Both tools, the Data Center Designer (DCD) and the API use the same concepts consistently and are well suited for smooth and intuitive use. 
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -160,10 +160,12 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
          * Retrieves a list of MongoDB users.
          * @summary Get all Cluster Users
          * @param {string} clusterId The unique ID of the cluster.
+         * @param {number} [limit] The maximum number of elements to return. Use together with \&#39;offset\&#39; for pagination.
+         * @param {number} [offset] The first element to return. Use together with \&#39;limit\&#39; for pagination.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clustersUsersGet: async (clusterId: string, options: any = {}): Promise<RequestArgs> => {
+        clustersUsersGet: async (clusterId: string, limit?: number, offset?: number, options: any = {}): Promise<RequestArgs> => {
             if (clusterId === null || clusterId === undefined) {
                 throw new RequiredError('clusterId','Required parameter clusterId was null or undefined when calling clustersUsersGet.');
             }
@@ -192,6 +194,20 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
                     ? await configuration.apiKey("Authorization")
                     : await configuration.apiKey;
                 localVarHeaderParameter["Authorization"] = "Bearer " + localVarApiKeyValue;
+            }
+
+            if ((limit === undefined) && (configuration !== undefined)) {
+                limit = configuration.getDefaultParamValue('limit');
+            }
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if ((offset === undefined) && (configuration !== undefined)) {
+                offset = configuration.getDefaultParamValue('offset');
+            }
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
             }
 
 
@@ -391,11 +407,13 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * Retrieves a list of MongoDB users.
          * @summary Get all Cluster Users
          * @param {string} clusterId The unique ID of the cluster.
+         * @param {number} [limit] The maximum number of elements to return. Use together with \&#39;offset\&#39; for pagination.
+         * @param {number} [offset] The first element to return. Use together with \&#39;limit\&#39; for pagination.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async clustersUsersGet(clusterId: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsersList>> {
-            const axiosArgs = await UsersApiAxiosParamCreator(configuration).clustersUsersGet(clusterId, options);
+        async clustersUsersGet(clusterId: string, limit?: number, offset?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UsersList>> {
+            const axiosArgs = await UsersApiAxiosParamCreator(configuration).clustersUsersGet(clusterId, limit, offset, options);
             return runRequest(axiosArgs, configuration);
         },
         /**
@@ -458,11 +476,13 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * Retrieves a list of MongoDB users.
          * @summary Get all Cluster Users
          * @param {string} clusterId The unique ID of the cluster.
+         * @param {number} [limit] The maximum number of elements to return. Use together with \&#39;offset\&#39; for pagination.
+         * @param {number} [offset] The first element to return. Use together with \&#39;limit\&#39; for pagination.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clustersUsersGet(clusterId: string, options?: any): AxiosPromise<UsersList> {
-            return UsersApiFp(configuration).clustersUsersGet(clusterId, options).then((request) => request(axios, basePath));
+        clustersUsersGet(clusterId: string, limit?: number, offset?: number, options?: any): AxiosPromise<UsersList> {
+            return UsersApiFp(configuration).clustersUsersGet(clusterId, limit, offset, options).then((request) => request(axios, basePath));
         },
         /**
          * Patches a MongoDB user specified by its ID.
@@ -544,6 +564,20 @@ export interface UsersApiClustersUsersGetRequest {
      * @memberof UsersApiClustersUsersGet
      */
     readonly clusterId: string
+
+    /**
+     * The maximum number of elements to return. Use together with \&#39;offset\&#39; for pagination.
+     * @type {number}
+     * @memberof UsersApiClustersUsersGet
+     */
+    readonly limit?: number
+
+    /**
+     * The first element to return. Use together with \&#39;limit\&#39; for pagination.
+     * @type {number}
+     * @memberof UsersApiClustersUsersGet
+     */
+    readonly offset?: number
 }
 
 /**
@@ -635,7 +669,7 @@ export class UsersApi extends BaseAPI {
      * @memberof UsersApi
      */
     public clustersUsersGet(requestParameters: UsersApiClustersUsersGetRequest, options?: any) {
-        return UsersApiFp(this.configuration).clustersUsersGet(requestParameters.clusterId, options).then((request) => request(this.axios, this.basePath));
+        return UsersApiFp(this.configuration).clustersUsersGet(requestParameters.clusterId, requestParameters.limit, requestParameters.offset, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

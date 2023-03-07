@@ -9,7 +9,7 @@ All URIs are relative to *https://api.ionos.com/databases/mongodb*
 
 ## clustersSnapshotsGet
 
-> <SnapshotList> clustersSnapshotsGet(clusterId)
+> <SnapshotList> clustersSnapshotsGet(clusterId, opts)
 
 Get the snapshots of your cluster
 
@@ -29,7 +29,10 @@ const api_instance = new ionoscloud.SnapshotsApi(config);
 // Get the snapshots of your cluster
 api_instance
   .clustersSnapshotsGet({
-    clusterId: clusterId_example
+    clusterId: clusterId_example,
+    limit: 100,
+    offset: 200, 
+    options: {}
   })
   .then((response) => console.log(response.data))
   .catch((error) => console.log(error.response.data));
@@ -40,6 +43,8 @@ api_instance
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
 | **clusterId** | **string** | The unique ID of the cluster. | [default to undefined] |
+| **limit** | **number** | The maximum number of elements to return. Use together with \&#39;offset\&#39; for pagination. | [optional][default to 100] |
+| **offset** | **number** | The first element to return. Use together with \&#39;limit\&#39; for pagination. | [optional][default to 0] |
 
 ### Return type
 

@@ -9,7 +9,7 @@ All URIs are relative to *https://api.ionos.com/databases/mongodb*
 
 ## templatesGet
 
-> <TemplateList> templatesGet
+> <TemplateList> templatesGet(opts)
 
 Get Templates
 
@@ -28,14 +28,21 @@ const config = new ionoscloud.Configuration({
 const api_instance = new ionoscloud.TemplatesApi(config);
 // Get Templates
 api_instance
-  .templatesGet()
+  .templatesGet({
+    limit: 100,
+    offset: 200
+    options: {}
+  })
   .then((response) => console.log(response.data))
   .catch((error) => console.log(error.response.data));
 ```
 
 ### Parameters
 
-This endpoint does not need any parameter.
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **limit** | **number** | The maximum number of elements to return. Use together with \&#39;offset\&#39; for pagination. | [optional][default to 100] |
+| **offset** | **number** | The first element to return. Use together with \&#39;limit\&#39; for pagination. | [optional][default to 0] |
 
 ### Return type
 
