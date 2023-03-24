@@ -23,7 +23,8 @@ export enum ResourceType {
     Collection = 'collection',
     Cluster = 'cluster',
     User = 'user',
-    Snapshot = 'snapshot'
+    Snapshot = 'snapshot',
+    Template = 'template'
 }
 
 

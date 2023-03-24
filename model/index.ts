@@ -30,6 +30,7 @@ export * from './snapshot-response';
 export * from './state';
 export * from './template-list';
 export * from './template-list-all-of';
+export * from './template-properties';
 export * from './template-response';
 export * from './user';
 export * from './user-metadata';

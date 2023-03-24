@@ -13,55 +13,44 @@
  */
 
 
+import { Metadata } from './metadata';
+import { ResourceType } from './resource-type';
+import { TemplateProperties } from './template-properties';
 
 /**
- * A MongoDB template item.
+ * A MongoDB template.
  * @export
  * @interface TemplateResponse
  */
 export interface TemplateResponse {
 
     /**
-     * The unique template ID.
+     * 
+     * @type {ResourceType}
+     * @memberof TemplateResponse
+     */
+    type?: ResourceType;
+
+    /**
+     * The unique ID of the resource.
      * @type {string}
      * @memberof TemplateResponse
      */
     id?: string;
 
     /**
-     * The name of the template.
-     * @type {string}
+     * 
+     * @type {Metadata}
      * @memberof TemplateResponse
      */
-    name?: string;
+    metadata?: Metadata;
 
     /**
-     * The edition of the template (e.g. enterprise)
-     * @type {string}
+     * 
+     * @type {TemplateProperties}
      * @memberof TemplateResponse
      */
-    edition?: string;
-
-    /**
-     * The number of CPU cores.
-     * @type {number}
-     * @memberof TemplateResponse
-     */
-    cores?: number;
-
-    /**
-     * The amount of memory in GB.
-     * @type {number}
-     * @memberof TemplateResponse
-     */
-    ram?: number;
-
-    /**
-     * The amount of storage size in GB.
-     * @type {number}
-     * @memberof TemplateResponse
-     */
-    storageSize?: number;
+    properties?: TemplateProperties;
 }
 
 

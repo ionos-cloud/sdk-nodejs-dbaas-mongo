@@ -1,6 +1,6 @@
 # TemplateList
 
-The list of MongoDB templates.
+List of MongoDB templates.
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |

@@ -13,18 +13,48 @@
  */
 
 
-import { Pagination } from './pagination';
-import { PaginationLinks } from './pagination-links';
-import { ResourceType } from './resource-type';
-import { TemplateListAllOf } from './template-list-all-of';
-import { TemplateResponse } from './template-response';
 
 /**
- * @type TemplateList
- * List of MongoDB templates.
+ * The properties of a MongoDB template.
  * @export
+ * @interface TemplateProperties
  */
-export type TemplateList = Pagination & TemplateListAllOf;
+export interface TemplateProperties {
 
+    /**
+     * The name of the template.
+     * @type {string}
+     * @memberof TemplateProperties
+     */
+    name?: string;
+
+    /**
+     * The edition of the template (e.g. enterprise)
+     * @type {string}
+     * @memberof TemplateProperties
+     */
+    edition?: string;
+
+    /**
+     * The number of CPU cores.
+     * @type {number}
+     * @memberof TemplateProperties
+     */
+    cores?: number;
+
+    /**
+     * The amount of memory in GB.
+     * @type {number}
+     * @memberof TemplateProperties
+     */
+    ram?: number;
+
+    /**
+     * The amount of storage size in GB.
+     * @type {number}
+     * @memberof TemplateProperties
+     */
+    storageSize?: number;
+}
 
 
